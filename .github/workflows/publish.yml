@@ -17,10 +17,10 @@ jobs:
           path: dist-repo
 
       - name: Show source files
-        run: find . -name "*.user.js"
+        run: find . -name "*.js"
 
       - name: Show source files
-        run: find . -name "*.user.js"
+        run: find . -name "*.js"
 
       - name: Copy userscript(s) to dist repo
         run: |
