@@ -7,25 +7,27 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js (if you need build tools)
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+      - name: Show repo contents
+        run: ls -R
 
-      - name: Install dependencies
-        run: npm install
+      - name: Create dist folder
+        run: mkdir -p dist
 
-      - name: Copy script to dist
-        run: cp your-script.user.js dist/
+      - name: Copy userscript(s) to dist
+        run: cp *.user.js dist/ || echo "No .user.js files found"
+
+      - name: Show dist contents
+        run: ls -R dist
 
       - name: Push to dist repo
         uses: ad-m/github-push-action@v0.6.0
         with:
-          repository: downtathelast/worldwide-dead-scripts
+          repository: yourusername/my-scripts-dist
           branch: main
           github_token: ${{ secrets.DIST_REPO_TOKEN }}
           force: true
