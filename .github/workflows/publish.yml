@@ -27,7 +27,7 @@ jobs:
       - name: Push to dist repo
         uses: ad-m/github-push-action@v0.6.0
         with:
-          repository: downtathelast/worldwide-dead-dist
+          repository: downtathelast/worldwide-dead-script-dist
           branch: main
           github_token: ${{ secrets.DIST_REPO_TOKEN }}
           force: true
