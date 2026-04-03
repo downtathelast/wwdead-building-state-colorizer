@@ -16,8 +16,14 @@ jobs:
           token: ${{ secrets.DIST_REPO_TOKEN }}
           path: dist-repo
 
+      - name: Show source files
+        run: find . -name "*.user.js"
+
       - name: Copy userscript(s) to dist repo
-        run: cp src/*.user.js dist-repo/ || echo "No .user.js files found"
+        run: |
+          cp src/*.user.js dist-repo/
+          echo "Copied files:"
+          ls -la dist-repo/
 
       - name: Commit and push to dist repo
         working-directory: dist-repo
