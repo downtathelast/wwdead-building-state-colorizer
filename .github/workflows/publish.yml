@@ -1,53 +1,29 @@
 name: Publish Distribution
-
 on:
   release:
     types: [published]
-
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-
     steps:
-      steps:
-  - name: Checkout source
-    uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-  - name: Checkout dist repo
-    uses: actions/checkout@v4
-    with:
-      repository: downtathelast/worldwide-dead-script-dist
-      token: ${{ secrets.DIST_REPO_TOKEN }}
-      path: dist-repo
-
-  - name: Copy userscript(s) to dist repo
-    run: cp *.user.js dist-repo/ || echo "No .user.js files found"
-
-  - name: Commit and push to dist repo
-    working-directory: dist-repo
-    run: |
-      git config user.name "github-actions[bot]"
-      git config user.email "github-actions[bot]@users.noreply.github.com"
-      git add .
-      git diff --staged --quiet || git commit -m "Update dist from release ${{ github.ref_name }}"
-      git push
-      - name: Show repo contents
-        run: ls -R
-
-      - name: Create dist folder
-        run: mkdir -p dist
-
-      - name: Copy userscript(s) to dist
-        run: cp *.user.js dist/ || echo "No .user.js files found"
-
-      - name: Show dist contents
-        run: ls -R dist
-
-      - name: Push to dist repo
-        uses: ad-m/github-push-action@v0.6.0
+      - name: Checkout dist repo
+        uses: actions/checkout@v4
         with:
           repository: downtathelast/worldwide-dead-script-dist
-          branch: main
-          github_token: ${{ secrets.DIST_REPO_TOKEN }}
-          force: true
-          directory: dist
+          token: ${{ secrets.DIST_REPO_TOKEN }}
+          path: dist-repo
+
+      - name: Copy userscript(s) to dist repo
+        run: cp *.user.js dist-repo/ || echo "No .user.js files found"
+
+      - name: Commit and push to dist repo
+        working-directory: dist-repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --staged --quiet || git commit -m "Update dist from release ${{ github.ref_name }}"
+          git push
