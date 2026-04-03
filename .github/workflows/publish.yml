@@ -19,6 +19,9 @@ jobs:
       - name: Show source files
         run: find . -name "*.user.js"
 
+      - name: Show source files
+        run: find . -name "*.user.js"
+
       - name: Copy userscript(s) to dist repo
         run: |
           cp src/*.user.js dist-repo/
