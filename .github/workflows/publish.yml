@@ -19,8 +19,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build dist files
-        run: npm run build  # your build command
+      - name: Copy script to dist
+        run: cp your-script.user.js dist/
 
       - name: Push to dist repo
         uses: ad-m/github-push-action@v0.6.0
